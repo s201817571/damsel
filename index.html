@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Responsive Movie Landing Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!--stylesheet-->
+  <link rel="stylesheet" href="">
+  <!--stylesheet-->
+  
+
+  <style>
+
+    @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Oswald', sans-serif;  
+    box-sizing: border-box; 
+}
+
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 100px;
+    z-index: 1000;
+}
+header .logo {
+    max-width: 200px;
+}
+header .toggle {
+    max-width: 60px;
+    cursor: pointer;
+}
+header .logo img,
+header .toggle img {
+    max-width: 100%;
+}
+.banner {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    padding: 0 100px;
+    background: url(https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj56d2VMXfHtXtS2jPXGQae4rCgxffLidWk6wjAB9cDk4ma2VWh0tRntZ6Mz2oG0MgYBcUmIlS3jlP6MMCuvnoIiQwu3lAvSebH-nbn7H5E7mJtCDFPsfEMHjVUZqL5-eLppMhIaM6bpZe3TzlSBIiY6LXeLoo-XTQyKcht9t1sfyEiJMPqfL6eKdJ0tbA/s1600/wallpapersden.com_damsel-2024-millie-bobby-brown_3840x2160.jpg);
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.banner .content {
+    max-width: 550px;
+}
+.banner .content h2 {
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 2em;
+    letter-spacing: 0.1em;
+    color: #fff;
+}
+.banner .content p {
+    font-size: 1.2em;
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    line-height: 1.5em;
+    color: #fff;
+    margin: 15px 0 35px;
+}
+.play {
+    position: relative;
+    display: inline-flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 500;
+    text-decoration: none;
+    letter-spacing: 2px;
+    font-size: 1.2em;
+}
+.trailer {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 10000;
+    background: rgba(0,0,0,0.95);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+}
+.trailer.active {
+    visibility: visible;
+    opacity: 1;
+}
+.iframe-wrap {
+    width: 100%;
+    max-width: 900px;
+}
+.iframe-container {
+    overflow: hidden;
+    padding-top: 56.25%;
+    position: relative;
+}  
+.iframe-container iframe {
+    border: 0;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+.trailer .close {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    cursor: pointer;
+    filter: invert(1);
+    max-width: 32px; 
+}
+@media (max-width: 991px) {
+    header {
+        padding: 20px 50px;
+    }
+    header .logo {
+        max-width: 130px;
+    }
+    header .toggle {
+        max-width: 40px;
+    }
+    .banner {
+        padding: 100px 50px;
+    }
+    .banner .content h2 {
+        font-weight: 400;
+        font-size: 2em;
+        letter-spacing: 0.05em;
+    }
+    .banner .content p {
+        font-size: 1em;
+    }
+    .slide {
+        position: relative;
+        bottom: initial;
+        left: 0;
+        width: 250px;
+        height: 150px;
+        margin: 20px 0;
+    }
+    .trailer video {
+        width: 90%;
+    }
+
+}
+svg#playBtn {
+    width: 100%;
+    height: auto;
+    vertical-align: middle;
+}
+.circle {
+    stroke: #e50914;
+    -webkit-transition: all 0.5s ease-in-out;
+    stroke-dashoffset: 0;
+    opacity: 1;
+}
+  
+.playBut {
+    display: inline-block;
+    -webkit-transition: all 0.5s ease;
+}
+.playBut:hover {
+    color: #e50914;  
+}
+.playBut .triangle {
+    -webkit-transition: all 0.7s ease-in-out;
+    stroke-dasharray: 240;
+    stroke-dashoffset: 480;
+    stroke: #fff;
+    transform: translateY(0);
+}
+.playBut:hover .triangle {
+    stroke-dashoffset: 0;
+    opacity: 1;
+    stroke: #e50914;
+}
+.playBut:hover .circle {
+    stroke-dasharray: 650;
+    stroke-dashoffset: 650;
+    opacity: 0.3;
+}
+  
+
+
+.sticky-ads{ 
+position: fixed; 
+bottom: 0; left: 0; 
+width: 100%; min-height: 70px; max-height: 200px; 
+padding: 5px 0; 
+box-shadow: 0 -6px 18px 0 rgba(9,32,76,.1); 
+-webkit-transition: all .1s ease-in; transition: all .1s ease-in; 
+display: flex; 
+align-items: center; 
+justify-content: center; 
+background-color: #fefefe; z-index: 20; } 
+
+.sticky-ads-close { 
+width: 30px; height: 30px; 
+display: flex; 
+align-items: center; 
+justify-content: center; 
+border-radius: 12px 0 0; 
+position: absolute; right: 0; top: -30px; 
+background-color: #fefefe; 
+box-shadow: 0 -6px 18px 0 rgba(9,32,76,.08); } 
+
+.sticky-ads .sticky-ads-close svg { width: 22px; height: 22px; fill: #000; } .sticky-ads .sticky-ads-content { overflow: hidden; display: block; position: relative; height: 70px; width: 100%; margin-right: 10px; margin-left: 10px; }
+
+
+  </style>
+
+
+
+</head>
+<body>
+
+
+<header>
+        <!--logo-->
+        <a href="#" class="logo" ><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj-EsrZY_M-XWN_PJKCrsk3dvQejz2X7qnaOUw2JacItH_hgNThO0O_s-V42Np0lGgsNA3a5nQmh_Er6ozE3AzirEGijIPdVGDaHrZyVY8ScV5OaR3c78UAdoInxlrumvARUHVOS3wXE-l1vv7HPnJrMK9skkWaDibUByZ9763MUyCGKA4V-Q5nZG1-nNw/s1600/DAMSEL%20%282%29.png" alt="DAMSEL"></a>
+        <!--logo-->
+
+        <!--left strip-->
+        <div class="toggle"><img src="https://lh3.google.com/u/0/d/1YYgaXRQGNwdOanCjqKCNKlWSUyyR2XGb=w878-h926-iv1"></div>
+        <!--left strip-->
+
+    </header>
+    <div class="banner">
+        <div class="content">
+
+            <h2>Are you ready to uncover the truth? It's 'Damsel' time, folks! Are you in?</h2>
+            <p>A dutiful damsel agrees to marry a handsome prince, only to find the royal family has recruited her as a sacrifice to repay an ancient debt. Thrown into a cave with a fire-breathing dragon, she must rely on her wits and will to survive.</p>
+
+
+            <a href="#" class="play playBut" onclick="toggle();">
+                <div style="display: inline-block; width: 50px;">
+                    <svg id="playBtn" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+                    x="0px" y="0px" width="213.7px" height="213.7px" viewBox="0 0 213.7 213.7" enable-background="new 0 0 213.7 213.7"
+                    xml:space="preserve">
+                    <polygon class='triangle' id="XMLID_18_" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+                73.5,62.5 148.5,105.8 73.5,149.1 "/>
+                    <circle class='circle' id="XMLID_17_" fill="none"  stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="106.8" cy="106.8" r="103.3"/>
+                    </svg>
+                </div>
+                Watch Trailer
+            </a>
+        </div>
+    </div>
+    <div class="trailer">
+        <div class="iframe-wrap">
+            <div class="iframe-container">
+                <iframe class="iframe-video" src="https://www.youtube.com/embed/ML4dY_5Jsk0" allowfullscreen></iframe>
+            </div>
+        </div>
+        <img src="https://lh3.google.com/u/0/d/1WVNhICAO7nWaF1_G4k80WDL-JPDLNklP=w878-h926-iv1" class="close" onclick="toggle();">
+    </div>
+
+<script>
+
+  function toggle(){
+            var trailer = document.querySelector('.trailer');
+            trailer.classList.toggle('active');
+            if(!trailer.classList.contains('active')) {
+                var iframe = document.querySelector('iframe');
+                var iframeSrc = iframe.src;
+            iframe.src = iframeSrc;
+            }
+        }
+
+</script>
+
+
+
+<!--[HTML CODE]-->
+<div class='sticky-ads' id='sticky-ads'>
+<div class='sticky-ads-close' onclick='document.getElementById(&quot;sticky-ads&quot;).style.display=&quot;none&quot;'><svg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'><path d='M278.6 256l68.2-68.2c6.2-6.2 6.2-16.4 0-22.6-6.2-6.2-16.4-6.2-22.6 0L256 233.4l-68.2-68.2c-6.2-6.2-16.4-6.2-22.6 0-3.1 3.1-4.7 7.2-4.7 11.3 0 4.1 1.6 8.2 4.7 11.3l68.2 68.2-68.2 68.2c-3.1 3.1-4.7 7.2-4.7 11.3 0 4.1 1.6 8.2 4.7 11.3 6.2 6.2 16.4 6.2 22.6 0l68.2-68.2 68.2 68.2c6.2 6.2 16.4 6.2 22.6 0 6.2-6.2 6.2-16.4 0-22.6L278.6 256z'/></svg></div>
+<div class='sticky-ads-content'>
+
+<!--ad space-->
+<div style="display: flex; justify-content: center; align-items: center; height: 100%;">
+  <a href="https://t.ly/powerplay" target="_blank">
+    <img alt="متجر متخصص في بيع المنتجات الرقمية واشتراكات برامج المسلسلات والافلام نركز على اعتماد اسعار منخفضة في السوق" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjlmYq7E9DspyoPOY-YhzL6iINZ3QxzXNGSeO8msjsms8gIgAp8mOmnpSWrREvzLgTz7kFwbkd9WXmSs3o0HZ3dlHMLLuUhOAAONgc-FOawApUiQMoigVzMgajJyfeXV3Dd7f6Wx8Iqs4Ihr6nwgt8kNJyUCoatdeoRsCBOml_Iyo0Ahltg84fzfkBmhfA/s1600/BIWHKN%20%284%29.gif" style="max-width: 100%; height: auto; display: block; margin: 0 auto;">
+  </a>
+</div>
+<!--ad space-->
+
+</div>
+</div>
+<!--[HTML CODE]-->
+
+
+
+</body>
+</html>
